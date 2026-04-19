@@ -105,3 +105,21 @@ resource "aws_dynamodb_table" "my_app_table" {
         Environment = var.env
     }
 }
+
+
+
+# Come Out of folder
+
+# Create providers.tf
+provider "aws" {
+  region = "ap-south-1"
+}
+
+# Go to main.tf
+
+module "dev-app" {
+  source        = "./my_app_infra_module"
+  my_env        = "dev"
+  instance_type = "t2.micro"
+  ami           = data.aws_ami.ubuntu.id
+}
