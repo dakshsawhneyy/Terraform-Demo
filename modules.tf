@@ -126,3 +126,17 @@ module "dev-app" {
   instance_type = "t2.micro"
   ami           = data.aws_ami.ubuntu.id
 }
+
+module "prd-app" {
+  source        = "./my_app_infra_module"
+  my_env        = "dev"
+  instance_type = "t2.micro"
+  ami           = data.aws_ami.ubuntu.id
+}
+
+module "stg-app" {
+  source        = "./my_app_infra_module"
+  my_env        = "dev"
+  instance_type = "t2.micro"
+  ami           = data.aws_ami.ubuntu.id
+}
