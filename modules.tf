@@ -26,6 +26,9 @@ resource "aws_key_pair" "deployer" {
   public_key = file("terra-key.pub")
 }
 
+# generate key
+ssh-keygen -t rsa -b 4096 -f terra-key
+
 resource "aws_default_vpc" "default" {
 }
 
