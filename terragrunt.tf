@@ -68,3 +68,8 @@ remote_state {
 create folder vpc inside dev
 create file terragrunt.hcl
 
+
+# use root parent folder
+include "root" {
+  path = find_in_parent_folders("root.hcl")
+}
