@@ -69,7 +69,7 @@ create folder vpc inside dev
 create file terragrunt.hcl
 
 
-# use root parent folder
+# use root parent folder at top
 include "root" {
   path = find_in_parent_folders("root.hcl")
 }
