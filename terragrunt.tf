@@ -61,3 +61,10 @@ remote_state {
     region         = "us-east-1"
   }
 }
+
+
+# creating vpc inside dev
+
+create folder vpc inside dev
+create file terragrunt.hcl
+
