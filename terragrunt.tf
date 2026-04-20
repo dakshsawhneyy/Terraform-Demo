@@ -28,3 +28,11 @@ output "subnet_id" {
 }
 
 
+# Go inside infra-live/
+
+create dev and prod folders
+
+create root.hcl in infra-live
+
+# DRY Concept - Don't repeat yourself
+
