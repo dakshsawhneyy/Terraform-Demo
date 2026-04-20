@@ -36,3 +36,13 @@ create root.hcl in infra-live
 
 # DRY Concept - Don't repeat yourself
 
+# Generate provider inside root.hcl
+generate "provider" {
+  path      = "provider.tf"
+  if_exists = "overwrite_terragrunt"
+  contents  = <<EOF
+provider "aws" {
+  region = "ap-south-1"
+}
+EOF
+}
