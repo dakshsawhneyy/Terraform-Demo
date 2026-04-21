@@ -1,3 +1,97 @@
+VPC Module
+infra.vpc/
+ ├── vpc.tf
+ ├── subnet.tf
+ ├── igw.tf
+ ├── route_table.tf
+ ├── variables.tf
+ ├── outputs.tf
+
+
+resource "aws_vpc" "main" {
+  cidr_block = var.vpc_cidr
+
+  tags = {
+    Name        = "${var.env}-vpc"
+    Environment = var.env
+  }
+}
+
+resource "aws_subnet" "public_subnets" {
+  count = length(var.public_subnet_cidrs)
+
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = var.public_subnet_cidrs[count.index]
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name = "${var.env}-public-subnet-${count.index + 1}"
+  }
+}
+
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "${var.env}-igw"
+  }
+}
+
+resource "aws_route_table" "public_rt" {
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw.id
+  }
+
+  tags = {
+    Name = "${var.env}-public-rt"
+  }
+}
+
+resource "aws_route_table_association" "public_assoc" {
+  count = length(aws_subnet.public_subnets)
+
+  subnet_id      = aws_subnet.public_subnets[count.index].id
+  route_table_id = aws_route_table.public_rt.id
+}
+
+variable "env" {}
+variable "vpc_cidr" {}
+variable "public_subnet_cidrs" {
+  type = list(string)
+}
+
+output "vpc_id" {
+  value = aws_vpc.main.id
+}
+
+output "public_subnet_ids" {
+  value = aws_subnet.public_subnets[*].id
+}
+
+
+# Call VPC Module in main.tf
+
+module "dev-vpc" {
+  source = "./infra.vpc"
+
+  env                  = "dev"
+  vpc_cidr             = "10.0.0.0/16"
+  public_subnet_cidrs  = ["10.0.1.0/24", "10.0.2.0/24"]
+}
+
+module "prd-vpc" {
+  source = "./infra.vpc"
+
+  env                  = "prd"
+  vpc_cidr             = "10.1.0.0/16"
+  public_subnet_cidrs  = ["10.1.1.0/24", "10.1.2.0/24"]
+}
+
+
+####################################
 ############ Creating Custom Module
 
 # Create folder (infra.app)
