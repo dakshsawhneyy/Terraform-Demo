@@ -271,3 +271,14 @@ locals {
     prd = "t3.medium"
   }
 }
+
+
+locals {
+  volume_map = {
+    dev = 10
+    stg = 15
+    prd = 20
+  }
+}
+
+volume_size = local.volume_map[terraform.workspace]
