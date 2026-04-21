@@ -7,6 +7,16 @@ terraform workspace new dev
 
 # one project -- n number for environments
 
+terraform workspace new dev
+terraform workspace new stg
+terraform workspace new prd
+
+terraform workspace select dev
+terraform apply
+
+terraform workspace select prd
+terraform apply
+
 VPC Module
 infra.vpc/
  ├── vpc.tf
