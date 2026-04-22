@@ -139,6 +139,28 @@ module "prd-vpc" {
   public_subnet_cidrs  = ["10.1.1.0/24", "10.1.2.0/24"]
 }
 
+# Instead of this 
+module "vpc" {
+  source = "./infra.vpc"
+
+  env                  = terraform.workspace
+  vpc_cidr             = local.vpc_cidrs_map[terraform.workspace]
+  public_subnet_cidrs  = local.public_subnet_cidrs_map[terraform.workspace]
+}
+
+locals {
+  vpc_cidrs_map = {
+    dev = "10.1.0.0/16"
+    stg = "10.2.0.0/16"
+    prd = "10.3.0.0/16"
+  }
+  public_subnet_cidrs_map = {
+    dev = ["10.1.1.0/24", "10.1.2.0/24"]
+    stg = ["10.2.1.0/24", "10.2.2.0/24"]
+    prd = ["10.3.1.0/24", "10.3.2.0/24"]
+  }
+}
+
 ####################################
 ############ Creating Custom Module
 
