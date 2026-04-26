@@ -112,3 +112,32 @@ include "root" {
 terragrunt init
 terragrunt plan
 terragrunt apply
+
+
+
+# introducing dependencies
+
+create new module ec2
+
+main.tf 
+
+resource "aws_instance" "demo" {
+  instance_type = var.instance_type
+  subnet_id = var.subnet_id
+  ami = var.ami
+}
+
+go inside dev folder and create ec2 folder and initialize terragrunt.hcl
+
+terraform {
+  # Source of module
+  source = "../../modules"
+}
+inputs {
+  # start providing inputs 
+  subnet_id =    (dependency)
+}
+
+depedency "vpc" {
+  config_path = "../vpc"
+}
