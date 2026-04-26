@@ -43,10 +43,10 @@ generate "provider" {
   path      = "provider.tf"
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
-provider "aws" {
-  region = "ap-south-1"
-}
-EOF
+    provider "aws" {
+      region = "ap-south-1"
+    }
+  EOF
 }
 
 
@@ -67,8 +67,18 @@ remote_state {
 
 # creating vpc inside dev
 
-create folder vpc inside dev
+create folder vpc and go inside it 
 create file terragrunt.hcl
+
+# Call module directly inside the file
+
+terraform {
+  # Source of module
+  source = "../../modules"
+}
+inputs {
+  # start providing inputs 
+}
 
 
 # use root parent folder at top
