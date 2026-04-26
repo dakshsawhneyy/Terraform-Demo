@@ -141,3 +141,6 @@ inputs {
 depedency "vpc" {
   config_path = "../../../live/vpc"    # vpc running location
 }
+
+
+terragrunt run-all apply
