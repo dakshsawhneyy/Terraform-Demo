@@ -135,9 +135,9 @@ terraform {
 }
 inputs {
   # start providing inputs 
-  subnet_id =    (dependency)
+  subnet_id = depedency.vpc.outputs.subnet_id   (dependency)
 }
 
 depedency "vpc" {
-  config_path = "../../../modules/vpc"    # vpc module location
+  config_path = "../../../live/vpc"    # vpc running location
 }
