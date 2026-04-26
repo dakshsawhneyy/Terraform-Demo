@@ -80,8 +80,7 @@ inputs {
   # start providing inputs 
 }
 
-
-# use root parent folder at top
+# use root parent folder at top of terragrunt.hcl
 include "root" {
   path = find_in_parent_folders("root.hcl")
 }
