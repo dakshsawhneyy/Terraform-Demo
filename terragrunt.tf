@@ -88,3 +88,27 @@ include "root" {
 terragrunt init
 terragrunt plan
 terragrunt apply
+
+
+# Now go to prod folder
+
+create file terragrunt.hcl
+
+# Call module directly inside the file
+
+terraform {
+  # Source of module
+  source = "../../modules"
+}
+inputs {
+  # start providing inputs 
+}
+
+# use root parent folder at top of terragrunt.hcl
+include "root" {
+  path = find_in_parent_folders("root.hcl")
+}
+
+terragrunt init
+terragrunt plan
+terragrunt apply
