@@ -85,4 +85,6 @@ include "root" {
   path = find_in_parent_folders("root.hcl")
 }
 
-run terragrunt init
+terragrunt init
+terragrunt plan
+terragrunt apply
