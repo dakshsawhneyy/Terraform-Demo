@@ -19,7 +19,7 @@ resource "aws_subnet" "demo" {
   }
 }
 
-# Output this vpc id and subnet id for ec2 creation
+# Output this vpc id and subnet id for ec2 module creation
 output "vpc_id" {
   value = aws_vpc.demo.id
 }
@@ -27,6 +27,7 @@ output "vpc_id" {
 output "subnet_id" {
   value = aws_subnet.demo.id
 }
+
 
 
 # Go inside infra-live/
