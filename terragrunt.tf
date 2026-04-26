@@ -1,7 +1,8 @@
 # Infrastructure Modules
 
-infrastrcture-modules/vpc/
+modules/vpc/
 
+# main.tf
 resource "aws_vpc" "demo" {
   cidr_block = var.vpc_cidr
   tags = {
