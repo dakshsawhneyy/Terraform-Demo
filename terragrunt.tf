@@ -74,7 +74,7 @@ create file terragrunt.hcl
 
 terraform {
   # Source of module
-  source = "../../modules"
+  source = "../../../modules"
 }
 inputs {
   # start providing inputs 
@@ -98,7 +98,7 @@ create file terragrunt.hcl
 
 terraform {
   # Source of module
-  source = "../../modules"
+  source = "../../modules/vpc"
 }
 inputs {
   # start providing inputs 
@@ -131,7 +131,7 @@ go inside dev folder and create ec2 folder and initialize terragrunt.hcl
 
 terraform {
   # Source of module
-  source = "../../modules"
+  source = "../../../modules/ec2"
 }
 inputs {
   # start providing inputs 
@@ -139,5 +139,5 @@ inputs {
 }
 
 depedency "vpc" {
-  config_path = "../vpc"
+  config_path = "../../../modules/vpc"    # vpc module location
 }
